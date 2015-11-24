@@ -14,6 +14,7 @@ public class ApplicationConfig extends Application {
     }
     
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(by.AndrewMedvedev.Pizza.Command.Categories.class);
         resources.add(by.AndrewMedvedev.Pizza.controller.Components.class);
         resources.add(by.AndrewMedvedev.Pizza.controller.Confirm.class);
         resources.add(by.AndrewMedvedev.Pizza.controller.Order.class);

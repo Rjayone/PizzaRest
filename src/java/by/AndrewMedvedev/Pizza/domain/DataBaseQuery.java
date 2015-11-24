@@ -1,5 +1,6 @@
 package by.AndrewMedvedev.Pizza.domain;
 
+import by.AndrewMedvedev.Pizza.model.DataBase.Category;
 import by.AndrewMedvedev.Pizza.model.DataBase.Component;
 
 import java.sql.ResultSet;
@@ -71,9 +72,25 @@ public class DataBaseQuery {
                 comp.setPrice(result.getInt(7));
                 comp.setImgPath(result.getString(3));
                 comp.setLayer(result.getString(4));
-                comp.setCategory(result.getString(6));
+                comp.setCategory(result.getInt(6));
                 comp.setCategoryTitle(result.getString(8));
                 comps.add(comp);
+            }
+        } catch (SQLException e) {
+            System.out.print(e.getMessage());
+        }
+    }
+    
+    public void selectAllCategories(ArrayList<Category> categories) {
+        DataBaseConnection connection = DataBaseConnection.getInstance();
+
+        try {
+            ResultSet result = connection.getStatement().executeQuery("SELECT * FROM pizza.category;");
+            while (result.next()) {
+                Category category = new Category();
+                category.setId(result.getInt(1));
+                category.setTitle(result.getString(2));
+                categories.add(category);
             }
         } catch (SQLException e) {
             System.out.print(e.getMessage());
@@ -98,7 +115,7 @@ public class DataBaseQuery {
                 comp.setPrice(result.getInt(7));
                 comp.setImgPath(result.getString(4));
                 comp.setLayer(result.getString(5));
-                comp.setCategory(result.getString(6));
+                comp.setCategory(result.getInt(6));
                 return comp;
             }
         } catch (SQLException e) {

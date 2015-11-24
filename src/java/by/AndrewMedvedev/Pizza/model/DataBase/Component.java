@@ -10,7 +10,7 @@ public class Component {
     @JsonProperty("price")          private int price;
     @JsonProperty("imgPath")        private String imgPath;
     @JsonProperty("layer")          private String layer;
-    @JsonProperty("category")       private String category;
+    @JsonProperty("category")       private int category;
     @JsonProperty("categoryTitle")  private String categoryTitle;
 
     public int getId() {
@@ -33,7 +33,7 @@ public class Component {
         return layer;
     }
 
-    public String getCategory() {
+    public int getCategory() {
         return category;
     }
 
@@ -67,7 +67,7 @@ public class Component {
     }
 
     @JsonCreator
-    public void setCategory(@JsonProperty("category") String category) {
+    public void setCategory(@JsonProperty("category") int category) {
         this.category = category;
     }
 
