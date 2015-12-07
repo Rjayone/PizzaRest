@@ -1,15 +1,19 @@
 package by.AndrewMedvedev.Pizza.controller;
 
-import by.AndrewMedvedev.Pizza.Command.Command;
-import by.AndrewMedvedev.Pizza.Command.CommandFactory;
+import by.AndrewMedvedev.Pizza.Utils.Utils;
+import by.AndrewMedvedev.Pizza.domain.DataBaseQuery;
+import by.AndrewMedvedev.Pizza.model.DataBase.Component;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.Produces;
-import javax.ws.rs.GET;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.Path;
-import javax.ws.rs.PUT;
+import javax.ws.rs.POST;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MultivaluedMap;
 
 
 @Path("order")
@@ -21,18 +25,21 @@ public class Order {
     public Order() {
     }
 
-    @GET
+    @POST
     @Produces("application/json")
-    public String getJson() {
-        //Command command = CommandFactory.receiveHandler(request);
-
-       // if(command != null)
-            //page = command.execute(request, response);
-        return null;
-    }
-
-    @PUT
-    @Consumes("application/json")
-    public void putJson(String content) {
+    public String setOreder(MultivaluedMap<String, String> params) {
+        String city    = params.getFirst("city");
+        String address = params.getFirst("address");
+        String phone   = params.getFirst("phone");
+        String price   = params.getFirst("price");
+        String comment = params.getFirst("comment");
+        String size    = params.getFirst("size");
+        String count   = params.getFirst("count");
+        String components = params.getFirst("components");
+        
+        ArrayList<Component> comps = Utils.componentStringToComponentsArray(components);
+        DataBaseQuery db = DataBaseQuery.getInstance();
+        boolean result = db.sendFullOrder(city, address, phone, comment, comps, size, price, count);
+        return "{\"success\" : \""+ result +"\"}";
     }
 }

@@ -12,6 +12,7 @@ public class Component {
     @JsonProperty("layer")          private String layer;
     @JsonProperty("category")       private int category;
     @JsonProperty("categoryTitle")  private String categoryTitle;
+    @JsonProperty("mass")           private int mass;
 
     public int getId() {
         return id;
@@ -39,6 +40,10 @@ public class Component {
 
     public String getCategoryTitle() {
         return categoryTitle;
+    }
+    
+    public int getMass() {
+        return mass;
     }
 
     @JsonCreator
@@ -74,5 +79,10 @@ public class Component {
     @JsonCreator
     public void setCategoryTitle(@JsonProperty("categoryTitle")String categoryTitle) {
         this.categoryTitle = categoryTitle;
+    }
+    
+    @JsonCreator
+    public void setMass(@JsonProperty("mass") int mass) {
+        this.mass = mass;
     }
 }

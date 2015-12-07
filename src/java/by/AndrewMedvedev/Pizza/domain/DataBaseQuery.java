@@ -69,11 +69,12 @@ public class DataBaseQuery {
                 Component comp = new Component();
                 comp.setId(result.getInt(1));
                 comp.setName(result.getString(2));
-                comp.setPrice(result.getInt(7));
+                comp.setPrice(result.getInt(8));
                 comp.setImgPath(result.getString(3));
                 comp.setLayer(result.getString(4));
                 comp.setCategory(result.getInt(6));
-                comp.setCategoryTitle(result.getString(8));
+                comp.setCategoryTitle(result.getString(9));
+                comp.setMass(result.getInt(7));
                 comps.add(comp);
             }
         } catch (SQLException e) {
@@ -116,6 +117,7 @@ public class DataBaseQuery {
                 comp.setImgPath(result.getString(4));
                 comp.setLayer(result.getString(5));
                 comp.setCategory(result.getInt(6));
+                comp.setMass(result.getInt(8));
                 return comp;
             }
         } catch (SQLException e) {
@@ -165,5 +167,28 @@ public class DataBaseQuery {
             System.err.print(e.getMessage());
         }
         return -1;
+    }
+    
+    public boolean sendFullOrder(String city, String address, String phone, String comment,
+                                 ArrayList<Component> comps, String size, String price, String count) {
+        String components = "";
+        for(int i = 0; i < comps.size(); i++) {
+            components += comps.get(i).getName();
+            if(i < comps.size() - 1)
+                components += ", ";
+        }
+
+        DataBaseConnection connection = DataBaseConnection.getInstance();
+        try {
+            String query = String.format(
+                    "INSERT INTO PizzaOrder (price, size, components, phone, city, address, comment, count) "
+                            + "values('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')"
+                    , price, size, components, phone, city, address, comment, count);
+            connection.getStatement().execute(query);
+        } catch (SQLException e) {
+            System.err.print(e.getMessage());
+            return false;
+        }
+        return true;
     }
 }
