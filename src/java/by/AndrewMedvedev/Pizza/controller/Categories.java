@@ -1,4 +1,4 @@
-package by.AndrewMedvedev.WebService;
+package by.AndrewMedvedev.Pizza.controller;
 
 import by.AndrewMedvedev.Pizza.controller.Components;
 import by.AndrewMedvedev.Pizza.domain.DataBaseQuery;
