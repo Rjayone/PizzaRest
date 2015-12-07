@@ -2,7 +2,6 @@ package by.AndrewMedvedev.Pizza.model.DataBase;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.io.IOException;
 
 public class Component {
     @JsonProperty("id")             private int id;
