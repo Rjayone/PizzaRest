@@ -17,6 +17,5 @@ public class ApplicationConfig extends Application {
         resources.add(by.AndrewMedvedev.Pizza.controller.Categories.class);
         resources.add(by.AndrewMedvedev.Pizza.controller.Components.class);
         resources.add(by.AndrewMedvedev.Pizza.controller.Order.class);
-    }
-    
+    }  
 }
